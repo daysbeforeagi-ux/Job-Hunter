@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "type": "greenhouse",
+      "name": "Example company",
+      "boardToken": "company-board-token",
+      "titleIncludes": ["strategy", "consultant", "transformation"],
+      "locationIncludes": ["India", "Delhi", "Mumbai", "Bengaluru", "Hyderabad"]
+    },
+    {
+      "type": "lever",
+      "name": "Another company",
+      "site": "company-site-token",
+      "titleIncludes": ["strategy", "AI", "program manager"],
+      "locationIncludes": ["India", "Remote"]
+    }
+  ]
+}

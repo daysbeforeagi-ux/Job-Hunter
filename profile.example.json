@@ -1,0 +1,60 @@
+{
+  "identity": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane@example.com",
+    "phone": "+1 555 010 1234",
+    "city": "Austin",
+    "country": "United States"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/jane-doe",
+    "portfolio": "https://janedoe.dev",
+    "github": "https://github.com/janedoe"
+  },
+  "workAuthorization": {
+    "authorizedCountries": ["United States"],
+    "requiresSponsorship": false
+  },
+  "experience": {
+    "currentTitle": "Software Engineer",
+    "years": 5,
+    "skills": ["TypeScript", "React", "Node.js"],
+    "summary": "Software engineer focused on accessible web products."
+  },
+  "education": [],
+  "preferences": {
+    "salaryExpectation": "",
+    "noticePeriod": "2 weeks",
+    "remotePreference": "Hybrid or remote",
+    "preferredLocations": ["Austin", "Remote"]
+  },
+  "applicationPolicy": {
+    "dailyTarget": 10,
+    "acceptedMatchBands": ["top", "medium"],
+    "excludedIndustries": [],
+    "excludedCompanies": [],
+    "excludedEmploymentTypes": []
+  },
+  "voluntaryDisclosures": {},
+  "resumeSets": [
+    {
+      "id": "frontend",
+      "name": "Frontend résumé",
+      "targetRoles": ["Frontend Engineer", "UI Engineer", "React Developer"],
+      "skills": ["TypeScript", "React", "Accessibility", "CSS"],
+      "summary": "Use for product-facing frontend and UI engineering roles.",
+      "resumePath": "/absolute/path/to/frontend-resume.pdf",
+      "coverLetterPath": ""
+    },
+    {
+      "id": "fullstack",
+      "name": "Full-stack résumé",
+      "targetRoles": ["Full-stack Engineer", "Software Engineer", "Node.js Developer"],
+      "skills": ["TypeScript", "React", "Node.js", "PostgreSQL"],
+      "summary": "Use for roles spanning web interfaces, APIs, and databases.",
+      "resumePath": "/absolute/path/to/fullstack-resume.pdf",
+      "coverLetterPath": ""
+    }
+  ]
+}

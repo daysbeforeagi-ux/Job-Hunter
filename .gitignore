@@ -1,0 +1,14 @@
+node_modules/
+.runtime/
+dist/
+.env
+.job-agent-browser/
+data/
+artifacts/
+profile.json
+sources.json
+Resumes/
+*.pdf
+*.docx
+.DS_Store
+SESSION_HANDOFF.md

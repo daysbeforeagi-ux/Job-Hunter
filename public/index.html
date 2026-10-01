@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <button class="nav-item" data-view="activity"><span>◷</span> Activity</button>
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="light dark">
+  <title>Job Agent</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">J</div><div><strong>Job Agent</strong><span>Screening assistant</span></div></div>
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>⌂</span> Overview</button>
+        <button class="nav-item" data-view="pipeline"><span>▤</span> Pipeline</button>
+        <button class="nav-item" data-view="activity"><span>◷</span> Activity</button>
+        <button class="nav-item" data-view="resumes"><span>◫</span> Résumé sets</button>
+        <button class="nav-item" data-view="connections"><span>↗</span> Connections</button>
+      </nav>
+      <div class="sidebar-foot"><span class="privacy-dot"></span><div><strong>Local & private</strong><span>Available only on this Mac</span></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar" id="overview">
+        <div><p class="eyebrow">PERSONAL JOB SEARCH</p><h1>Good <span id="greeting-period">day</span>, <span id="candidate-first-name">there</span>.</h1><p class="subhead">Discover and rank roles when you choose. Every application stays in your hands.</p></div>
+        <div class="top-actions"><button id="refresh-button" class="icon-button" title="Refresh" aria-label="Refresh">↻</button><button id="add-job-button" class="secondary-button">＋ Add job</button></div>
+      </header>
+
+      <section id="notice" class="notice hidden" role="status"></section>
+
+      <section class="activity-panel" id="activity" aria-labelledby="activity-title">
+        <div class="activity-heading">
+          <div><p class="eyebrow">APPLICATION HISTORY</p><h2 id="activity-title">Your activity</h2><p id="activity-range" class="activity-range">Loading recorded outcomes…</p></div>
+          <div class="period-control" role="group" aria-label="Activity period">
+            <button class="period-button active" data-period="week" aria-pressed="true">Week</button>
+            <button class="period-button" data-period="month" aria-pressed="false">Month</button>
+            <button class="period-button" data-period="year" aria-pressed="false">Year</button>
+          </div>
+        </div>
+        <div class="metrics" id="activity-metrics" aria-live="polite"></div>
+      </section>
+
+      <section class="control-card">
+        <div><h2>Discovery & ranking</h2><p>One click finds and ranks up to 30 roles against every résumé set.</p><div class="daily-scan-control"><label for="daily-scan-limit">Jobs screened daily</label><input id="daily-scan-limit" type="number" min="1" max="100" step="1" inputmode="numeric"><button id="save-scan-limit" class="quiet-button" type="button">Use from tomorrow</button><span id="daily-scan-status">Loading…</span></div></div>
+        <div class="control-actions"><button id="automation-button" class="primary-button">Find & Rank Jobs</button><button id="sync-button" class="quiet-button">Sync Sheet</button><a class="quiet-link" href="/api/export.csv">Export CSV</a></div>
+      </section>
+
+      <section class="panel pipeline-panel" id="pipeline">
+        <div class="panel-header pipeline-head">
+          <div><h2>Application pipeline</h2><p id="queue-summary">No jobs tracked yet</p></div>
+          <div class="filter-tabs" role="tablist" aria-label="Job status filter"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="ready">Ready</button><button class="filter" data-filter="saved">Not applied yet</button><button class="filter" data-filter="submitted">Applied</button><button class="filter" data-filter="not_interested">Not interested</button><button class="filter" data-filter="job_closed">Unavailable</button></div>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Role</th><th>Match</th><th>Résumé</th><th>Status</th><th>Updated</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="jobs-table"></tbody></table>
+          <div id="empty-state" class="empty-state"><div class="empty-symbol">⌁</div><h3>Your pipeline is ready</h3><p>Find and rank matching roles when you’re ready.</p><button class="primary-button" id="empty-automation-button">Find & Rank Jobs</button></div>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel compact-panel" id="resumes"><div class="panel-header"><div><h2>Résumé sets</h2><p>Recommended for each role</p></div><div class="resume-panel-actions"><span id="resume-count" class="count-pill">0</span><button id="add-resume-button" class="quiet-button" type="button">＋ Add résumé</button></div></div><div id="resume-list" class="simple-list"></div></article>
+        <article class="panel compact-panel" id="connections"><div class="panel-header"><div><h2>System readiness</h2><p>Screening and integrations</p></div></div><div id="readiness-list" class="simple-list"></div></article>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="add-job-dialog">
+    <form id="add-job-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">QUEUE INTAKE</p><h2>Add a job</h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="Close">×</button></div>
+      <label>Job posting URL<input id="job-url" name="url" type="url" placeholder="https://company.com/jobs/123" pattern="https://.*" required></label>
+      <label>Source<input id="job-source" name="source" type="text" value="dashboard" maxlength="80"></label>
+      <p class="form-help">Only HTTPS URLs are accepted. Tracking parameters are removed automatically.</p>
+      <div class="dialog-actions"><button type="button" id="cancel-dialog" class="secondary-button">Cancel</button><button type="submit" class="primary-button">Add to queue</button></div>
+    </form>
+  </dialog>
+  <dialog id="add-resume-dialog">
+    <form id="resume-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">RÉSUMÉ SET</p><h2>Add a résumé</h2></div><button type="button" id="close-resume-dialog" class="icon-button" aria-label="Close">×</button></div>
+      <label for="resume-name">Résumé set name<input id="resume-name" name="name" type="text" maxlength="80" placeholder="e.g. Product Strategy" required></label>
+      <label for="resume-file">PDF résumé<input id="resume-file" name="resume" type="file" accept=".pdf,application/pdf" required></label>
+      <label class="consent-control" for="resume-ai-consent"><input id="resume-ai-consent" type="checkbox" required><span>Send extracted résumé text to Gemini once to create a concise matching profile. The PDF stays local; full text is not stored in job records.</span></label>
+      <p class="form-help">PDF only · Maximum 10 MB. The new set will be considered alongside your existing résumé sets.</p>
+      <div class="dialog-actions"><button type="button" id="cancel-resume-upload" class="secondary-button">Cancel</button><button type="submit" id="upload-resume-submit" class="primary-button">Add résumé</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

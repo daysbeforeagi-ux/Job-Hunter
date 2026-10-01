@@ -1,0 +1,26 @@
+{
+  "name": "supervised-job-application-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "PLAYWRIGHT_BROWSERS_PATH=.runtime/playwright node --env-file-if-exists=.env --import tsx src/index.ts",
+    "dashboard": "node --env-file-if-exists=.env --import tsx src/dashboard.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "PLAYWRIGHT_BROWSERS_PATH=.runtime/playwright node --import tsx --test test/*.test.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "pdfjs-dist": "^5.4.149",
+    "playwright": "^1.55.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.3",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}
